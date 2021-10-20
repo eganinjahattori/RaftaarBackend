@@ -8,11 +8,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //CORS
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     next();
+// });
+
+
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "*");
+    res.header("Access-Control-Allow-Headers", "*"); //'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    if (req.method === "OPTIONS") {
+        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+        return res.status(200).json({});
+    }
     next();
-  });
+});
+
 
 mongoose.connect(
     "mongodb+srv://raftaaruser:eganinja2021@cluster0.f4sgh.mongodb.net/Cluster0?retryWrites=true&w=majority",
@@ -138,24 +149,24 @@ app.post('/bookTable', async (req, res) => {
     }
 });
 
-app.get('/all/query', async(req, res) => {
+app.get('/all/query', async (req, res) => {
     contactModel.find({}, function (err, records) {
         if (err) {
             console.log(err);
             return res.status(500).send("Some error occured. Please contact your administrator.");
         } else {
-            return res.status(200).send({data: records});
+            return res.status(200).send({ data: records });
         }
     })
 });
 
-app.get('/all/booking', async(req, res) => {
+app.get('/all/booking', async (req, res) => {
     bookTableModel.find({}, function (err, records) {
         if (err) {
             console.log(err);
             return res.status(500).send("Some error occured. Please contact your administrator.");
         } else {
-            return res.status(200).send({data: records});
+            return res.status(200).send({ data: records });
         }
     })
 });

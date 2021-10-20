@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 //CORS
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*");
     next();
   });
 
@@ -57,6 +58,7 @@ app.get('/backend', async (req, res) => {
 });
 
 app.post('/contact', async (req, res) => {
+    console.log(req.body);
     try {
         const { name, email, subject, message } = req.body;
         console.log(name, email, subject, message);

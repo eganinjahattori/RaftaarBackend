@@ -7,6 +7,12 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//CORS
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  });
+
 mongoose.connect(
     "mongodb+srv://raftaaruser:eganinja2021@cluster0.f4sgh.mongodb.net/Cluster0?retryWrites=true&w=majority",
     {

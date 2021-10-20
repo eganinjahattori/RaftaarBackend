@@ -8,10 +8,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //CORS
-// app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     next();
-// });
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+});
 
 
 app.use((req, res, next) => {
@@ -68,7 +68,7 @@ app.get('/backend', async (req, res) => {
     return res.send("Backend Server");
 });
 
-app.post('/contact', async (req, res) => {
+app.post('/contact', async (req, res, next) => {
     console.log(req.body);
     try {
         const { name, email, subject, message } = req.body;

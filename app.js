@@ -152,6 +152,6 @@ app.get('/all/booking', async(req, res) => {
     })
 });
 
-app.listen(4040, () => {
+app.listen(process.env.PORT || 4040, () => {
     console.log("Server is live");
 });

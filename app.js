@@ -171,6 +171,19 @@ app.get('/all/booking', async (req, res) => {
     })
 });
 
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    console.log(username, password);
+    if(username == 'raftaaradmin123' && password=='raftaarevents@2021')
+    {
+        return res.status(200).send({"message":"success", "status:":200});
+    }
+    else
+    {
+        return res.status(404).send({"message":"failure", "status:":404});
+    }
+});
+
 app.listen(process.env.PORT || 4040, () => {
     console.log("Server is live");
 });
